@@ -2,7 +2,7 @@
 
 ## Description
 
-This Python script simulates an ordering system for a food truck. Customers can browse through a menu categorized into Snacks, Meals, Drinks, and Desserts, select items, specify quantities, and review their total order. The script ensures that the user makes valid selections and allows them to continue ordering until they decide to stop.
+This script lets you order from my food truck! You can run through it and choose as many or as few of any item as you like, and see an itemized receipt at the end with your total.
 
 ## How to Use
 
