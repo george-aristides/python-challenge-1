@@ -4,6 +4,8 @@
 
 This script lets you order from my food truck! You can run through it and choose as many or as few of any item as you like, and see an itemized receipt at the end with your total.
 
+It is foolproofed and there is no way to break the program while using it, so once you begin an order you must complete it or terminate the program manually.
+
 ## How to Use
 
 1. **Run the Script**: Execute the script to start the ordering process.
@@ -18,11 +20,6 @@ This script lets you order from my food truck! You can run through it and choose
 
 6. **Review Order**: Once the order is complete, the script will display a summary of all items ordered along with their prices and quantities, and calculate the total cost.
 
-## Features
-
-- **User-Friendly Interface**: Guides the user through selecting categories and items.
-- **Validation**: Ensures that the user inputs valid numbers for menu selections and quantities.
-- **Order Summary**: Provides a clear and formatted summary of the order.
 
 ## Example
 
