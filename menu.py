@@ -1,24 +1,56 @@
+"""
+I am making these  docstring block comments as notes for myself to better 
+understand what is going on in my script.
+
+I am probably not properly using them according to convention in Python.
+
+Please let me know in the feedback if you find this kind of stuff helpful for 
+grading/understanding what I am doing, or if I should omit these larger block 
+notes in the future.
+
+Thank you!
+"""
+
+while True:
+    print("Dear Grader,")
+    print("Please make sure to check the docstring at the top at some point in case you run this before looking at the code.")
+    print("Press enter to continute.")
+    print("Thank you!")
+    complete = input("")
+    match complete:
+        case _:
+            break
+
 # Menu dictionary
 menu = {
     "Snacks": {
-        "Cookie": .99,
-        "Banana": .69,
-        "Apple": .49,
-        "Granola bar": 1.99
+        "Cookie" : {
+            "chocolate chip" : .99,
+            "snickerdoodle" : .99
+        },
+        "Fresh Fruit" : {
+            "apple" : .49,
+            "banana" : .69
+        },
+        "Pita" : {
+            "spanakopita" : 1.99,
+            "tiropia" : 1.99
+        } 
     },
     "Meals": {
-        "Burrito": 4.49,
-        "Teriyaki Chicken": 9.99,
-        "Sushi": 7.49,
-        "Pad Thai": 6.99,
+        "Burrito": {
+            "Beef": 7.99,
+            "Chicken": 8.99,
+            "Bean": 6.99
+        },
         "Pizza": {
             "Cheese": 8.99,
             "Pepperoni": 10.99,
             "Vegetarian": 9.99
         },
-        "Burger": {
+        "Gyro": {
             "Chicken": 7.49,
-            "Beef": 8.49
+            "Pork": 8.49
         }
     },
     "Drinks": {
@@ -33,13 +65,14 @@ menu = {
             "Irish breakfast": 2.49
         },
         "Coffee": {
+            "Greek": 2.49,
             "Espresso": 2.99,
             "Flat white": 2.99,
             "Iced": 3.49
         }
     },
     "Dessert": {
-        "Chocolate lava cake": 10.99,
+        "Galaktoboureko": 10.99,
         "Cheesecake": {
             "New York": 4.99,
             "Strawberry": 6.49
@@ -71,12 +104,89 @@ while place_order:
 
     # Print the options to choose from menu headings (all the first level
     # dictionary items in menu).
+
+    """
+    For myself:
+
+    This for loop takes the categories in the menu dictionary and assigns 
+    each of them a number
+        - The categories, i.e. snacks, meals, drinks, and dessert, are the keys
+          in the dictionary
+        - The information assigned to each key is the value, which in almost
+          every case except dessert is another dictionary
+
+    i is the number that is assigned to each category - each category gets
+    a number key when printed, and after each iteration i is increased by 1
+
+    So each menu key is assigned a key to identify it here
+    """
     for key in menu.keys():
         print(f"{i}: {key}")
         # Store the menu category associated with its menu item number
         menu_items[i] = key
         # Add 1 to the menu item number
         i += 1
+
+    """
+    For myself:
+    
+    The challenge here is book-keeping considering the number of nested 
+    dictionaries and other annoying stuff to keep track of
+
+    Now we have assigned number keys to every category in the menu dictionary
+    
+    We have nested if else statements here
+        - The first if else checks if the entry is a number
+            - If it is it moves to the next if else
+            - If it is not it prints "You didn't select a number."
+            then moves to the match case statement 
+        - The second if else if the number key you selected is one
+        of the available options
+            -If it is it saves the name of the category associated with the
+                previously assigned number key to the new variable
+                -It the prints the new variable, which has the name of the category
+                -It then prompts to select the sub-elements of that menu catgory
+                -We re-initialize the i=1 and menu_items dictionary here for the
+                sub dictionaries stored within the values for each main category key
+                -It prints some stuff for visual formatting ...
+                -Now we have a for loop within the if statement
+                    -The loop first checks if the value is another dictionary
+                        -If it is a dictionary it creates enumerated key value 
+                        pairs for the elements of the sub dictionary
+                        -The rest is some visual formatting stuff to find how
+                        how many spaces are needed to make things line up
+                    -Else it just prints the items in the dictionary without 
+                    needing to go through another sub dictionary
+            -The Else for this case is if you select anything other than one 
+            of the available number key options
+        - The third if else is within the second if else, after the for loop
+        that goes through all the items within the category or further 
+        sub categories
+            -It checks - since we just listed out some set of items within a
+            category - if the user input selected is a number
+                -It the checks if this number is one of the available options
+                with another if else statement
+                    -This if else again checks if the user input number is valid
+                    as an option, stores it, and asks for a quantity
+                        -Within this there is another if else that checks to see
+                        if the quantity provided is a number, and if not 
+                        it defaults to 1 
+                    -Finally we interact with the order list we initialized a 
+                    while back by appending the information - the item name,
+                    price, and quantity - to the order list in the form of a 
+                    dictionary with all of the information about each item
+                    being a key value pair
+            -Else it prints "You didn't select a number." and tells you you 
+            didn't choose one of the options
+
+    This all together should ensure that the user ends up selecting something 
+    and there is no case where they continue without properly interacting with 
+    the item selection process
+
+    Since this process is not within but runs in sequence after a while loop,
+    as long as the while loop condition is not broken the user can keep running 
+    through this loop until they intentionally break the while loop
+    """
 
     # Get the customer's input
     menu_category = input("Type menu number: ")
@@ -159,21 +269,35 @@ while place_order:
         # Tell the customer they didn't select a number
         print("You didn't select a number.")
 
+    """
+    The final piece of the while loop is this match case statement
+
+    This is the piece that can break the while loop we set at the beginning
+
+    The match case means we can set multiple conditions to be met, and if one 
+    of the conditions is met then the line indented below is executed
+
+    in 
+    """
+
     # Ask the customer if they would like to order anything else
-    keep_ordering = input("Would you like to keep ordering? (Y)es or (N)o ").lower()
-    match keep_ordering:
-        case "n":
-            place_order = False
-        case "y":
-            print("Thank you for your order.")
-        case _:
-            print("Please try again.")
+    while True:
+        keep_ordering = input("Would you like to keep ordering? (Y)es or (N)o ").lower()
+        match keep_ordering:
+            case "n":
+                place_order = False
+                break
+            case "y":
+                print("Thank you for your order.")
+                break
+            case _:
+                print("Please type (Y)es to continue ordering or (N)o to complete your order.")
 
 # Print out the customer's order
 print("This is what we are preparing for you.\n")
 
 # Uncomment the following line to check the structure of the order
-print(order)
+# print(order)
 
 print("Item name                 | Price  | Quantity")
 print("--------------------------|--------|----------")
